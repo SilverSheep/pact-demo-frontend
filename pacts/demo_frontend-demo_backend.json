@@ -1,0 +1,57 @@
+{
+  "consumer": {
+    "name": "Demo frontend"
+  },
+  "provider": {
+    "name": "Demo backend"
+  },
+  "interactions": [
+    {
+      "description": "a request for all dogs",
+      "providerState": "i have a list of dogs",
+      "request": {
+        "method": "GET",
+        "path": "/dogs"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": [
+          {
+            "name": "Max",
+            "age": 3
+          },
+          {
+            "name": "Lassie",
+            "age": 8
+          }
+        ]
+      }
+    },
+    {
+      "description": "a request for a single dog",
+      "providerState": "i have a list of dogs",
+      "request": {
+        "method": "GET",
+        "path": "/dogs/1"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Max",
+          "age": 3
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

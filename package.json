@@ -1,0 +1,20 @@
+{
+  "name": "demo-frontend-mocha-example",
+  "version": "1.0.0",
+  "description": "Demo frontend Pact example using Mocha",
+  "main": "demo-frontend.js",
+  "scripts": {
+    "test": "rimraf pacts && mocha",
+    "test:publish": "node ./test/publish.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "@pact-foundation/pact": "^9.11.1",
+    "chai": "^3.5.0",
+    "mocha": "^5.1.1",
+    "rimraf": "^2.6.2"
+  }
+}
