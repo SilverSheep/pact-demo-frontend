@@ -96,7 +96,7 @@ describe("Demo frontend Pact Test", () => {
         uponReceiving: "a request for a single dog",
         withRequest: {
           method: "GET",
-          path: "/dogs/1",
+          path: "/dogs/Max",
         },
         willRespondWith: {
           status: 200,

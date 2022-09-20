@@ -17,7 +17,7 @@ const opts = {
   pactFilesOrDirs: [path.resolve(process.cwd(), "pacts")],
   pactBroker: "https://silversheep.pactflow.io",
   pactBrokerToken: process.env.PACTFLOW_TOKEN,
-  consumerVersion: '3',
+  consumerVersion: '1'
 }
 
 new Publisher(opts)
