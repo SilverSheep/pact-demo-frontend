@@ -26,7 +26,7 @@ exports.getMeDog = endpoint => {
   return axios.request({
     method: "GET",
     baseURL: `${url}:${port}`,
-    url: "/dogs/Max",
+    url: "/dogs/12",
     headers: { Accept: "application/json" },
   })
 }

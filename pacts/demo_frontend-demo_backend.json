@@ -35,7 +35,13 @@
       "providerState": "i have a list of dogs",
       "request": {
         "method": "GET",
-        "path": "/dogs/Max"
+        "path": "/dogs/12",
+        "matchingRules": {
+          "$.path": {
+            "match": "regex",
+            "regex": "\\/dogs\\/\\d+"
+          }
+        }
       },
       "response": {
         "status": 200,

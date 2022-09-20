@@ -3,8 +3,10 @@
 // This is the Pact test for the Demo frontend 
 
 const expect = require("chai").expect
+
 const path = require("path")
 const { Pact } = require("@pact-foundation/pact")
+const { term } =  require("@pact-foundation/pact/src/dsl/matchers")
 
 // Load the consumer client code which we will call in our test
 const { getMeDogs, getMeDog } = require("../demo-frontend")
@@ -21,7 +23,6 @@ describe("Demo frontend Pact Test", () => {
     spec: 2,
     consumer: "Demo frontend",
     provider: "Demo backend",
-
   })
 
   // Setup the provider
@@ -96,7 +97,7 @@ describe("Demo frontend Pact Test", () => {
         uponReceiving: "a request for a single dog",
         withRequest: {
           method: "GET",
-          path: "/dogs/Max",
+          path: term({ matcher: "\\/dogs\\/\\d+", generate: "/dogs/12"}),
         },
         willRespondWith: {
           status: 200,

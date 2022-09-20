@@ -15,7 +15,7 @@ const gitSha = process.env.TRAVIS_COMMIT || exec("git rev-parse HEAD || echo LOC
 
 const opts = {
   pactFilesOrDirs: [path.resolve(process.cwd(), "pacts")],
-  pactBroker: "https://silversheep.pactflow.io",
+  pactBroker: "<<PACT_BROKER_URL>>",
   pactBrokerToken: process.env.PACTFLOW_TOKEN,
   consumerVersion: '1'
 }
