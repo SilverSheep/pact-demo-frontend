@@ -21,6 +21,7 @@ describe("Demo frontend Pact Test", () => {
     spec: 2,
     consumer: "Demo frontend",
     provider: "Demo backend",
+
   })
 
   // Setup the provider

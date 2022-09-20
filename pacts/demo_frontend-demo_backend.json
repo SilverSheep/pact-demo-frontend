@@ -35,7 +35,7 @@
       "providerState": "i have a list of dogs",
       "request": {
         "method": "GET",
-        "path": "/dogs/1"
+        "path": "/dogs/Max"
       },
       "response": {
         "status": 200,
