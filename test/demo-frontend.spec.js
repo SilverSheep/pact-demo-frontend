@@ -9,7 +9,7 @@ const { Pact } = require("@pact-foundation/pact")
 const { term } =  require("@pact-foundation/pact/src/dsl/matchers")
 
 // Load the consumer client code which we will call in our test
-const { getMeDogs, getMeDog } = require("../demo-frontend")
+const { getMeDogs, getMeDog, saveDog} = require("../demo-frontend")
 
 describe("Demo frontend Pact Test", () => {
   let url = "http://localhost"
@@ -70,7 +70,7 @@ describe("Demo frontend Pact Test", () => {
       })
     })
 
-    it("returns the correct response", done => {
+    it("returns list of dogs", done => {
       // We call our consumer code, and that will make requests to the mock server
       const urlAndPort = {
         url: url,
@@ -83,7 +83,7 @@ describe("Demo frontend Pact Test", () => {
     })
   })
 
-  describe("get /dog/1", () => {
+  describe("get /dogs/1", () => {
     // This is the body we expect to get back from the provider
     const EXPECTED_BODY =
       {
@@ -97,7 +97,7 @@ describe("Demo frontend Pact Test", () => {
         uponReceiving: "a request for a single dog",
         withRequest: {
           method: "GET",
-          path: term({ matcher: "\\/dogs\\/\\d+", generate: "/dogs/12"}),
+          path: term({ matcher: "\\/dogs\\/\\d+", generate: "/dogs/1"}),
         },
         willRespondWith: {
           status: 200,
@@ -112,13 +112,57 @@ describe("Demo frontend Pact Test", () => {
       })
     })
 
-    it("returns the correct response", done => {
+    it("returns single dog", done => {
       const urlAndPort = {
         url: url,
         port: port,
       }
       getMeDog(urlAndPort).then(response => {
         expect(response.data).to.eql(EXPECTED_BODY)
+        done()
+      }, done)
+    })
+  })
+
+  describe("post /dogs", () => {
+    const DOG_NAME = 'newDog';
+    const DOG_AGE = 1;
+
+    const REQUEST_BODY =
+        {
+          name: DOG_NAME,
+          age: DOG_AGE
+        };
+
+    before(done => {
+      const interaction = {
+        state: "i can save a dog",
+        uponReceiving: "a request to save a dog",
+        withRequest: {
+          method: "POST",
+          path: "/dogs",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: REQUEST_BODY
+        },
+        willRespondWith: {
+          status: 201,
+          headers: {"Location": term({ matcher: "\\/dogs\\/\\d+", generate: "/dogs/1"})},
+        },
+      }
+      provider.addInteraction(interaction).then(() => {
+        done()
+      })
+    })
+
+    it("saves Dog", done => {
+      const urlAndPort = {
+        url: url,
+        port: port,
+      }
+      saveDog(urlAndPort, DOG_NAME, DOG_AGE).then(response => {
+        expect(response.status).to.eql(201)
         done()
       }, done)
     })

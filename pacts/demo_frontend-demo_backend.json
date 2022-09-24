@@ -35,7 +35,7 @@
       "providerState": "i have a list of dogs",
       "request": {
         "method": "GET",
-        "path": "/dogs/12",
+        "path": "/dogs/1",
         "matchingRules": {
           "$.path": {
             "match": "regex",
@@ -51,6 +51,33 @@
         "body": {
           "name": "Max",
           "age": 3
+        }
+      }
+    },
+    {
+      "description": "a request to save a dog",
+      "providerState": "i can save a dog",
+      "request": {
+        "method": "POST",
+        "path": "/dogs",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "newDog",
+          "age": 1
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Location": "/dogs/1"
+        },
+        "matchingRules": {
+          "$.headers.Location": {
+            "match": "regex",
+            "regex": "\\/dogs\\/\\d+"
+          }
         }
       }
     }

@@ -26,7 +26,20 @@ exports.getMeDog = endpoint => {
   return axios.request({
     method: "GET",
     baseURL: `${url}:${port}`,
-    url: "/dogs/12",
+    url: "/dogs/1",
+    headers: { Accept: "application/json" },
+  })
+}
+
+exports.saveDog = (endpoint, dogName, dogAge) => {
+  const url = endpoint.url
+  const port = endpoint.port
+
+  return axios.request({
+    method: "POST",
+    baseURL: `${url}:${port}`,
+    url: "/dogs",
+    data: {name: dogName, age: dogAge},
     headers: { Accept: "application/json" },
   })
 }
